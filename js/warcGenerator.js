@@ -121,10 +121,10 @@ const WARCEntryCreator = {
 /* ************** BEGIN FEROSS-STANDARD STYLE CONFORMITY HELPERS **************  */
 
 const helperREs = {
-  jsregexp: new RegExp('content-type:[ ]*(text|application)/(javascript|js)', 'i'),
-  imgregexp: new RegExp('content-type:[ ]*image/', 'i'),
-  cssregexp: new RegExp('content-type:[ ]*text/(css|stylesheet)', 'i'),
-  fontregexp: new RegExp('content-type:[ ]*font/', 'i'),
+  jsregexp: /content-type:[ ]*(text|application)\/(javascript|js)/i,
+  imgregexp: /content-type:[ ]*image\//i,
+  cssregexp: /content-type:[ ]*text\/(css|stylesheet)/i,
+  fontregexp: /content-type:[ ]*font\//i,
   whileMyArrayRe: /\r\n(.*)\r\n----------------/g
 }
 
@@ -384,9 +384,7 @@ function uploadWarc (abArray) {
   ajaxRequest.send(blobFromArrayBuffers)
 }
 
-// Legit scoped vars (i.e., do not let/const) due to inter-function/file usage
-// TODO: Either manually hoist or express this more methodically
-var warcfileURI = '' // The Chrome notifications API isn't mature enough to surface data, even via buttons
+let warcfileURI = '' // The Chrome notifications API isn't mature enough to surface data, even via buttons
 let version
 getVersion(function (ver) { version = ver })
 
